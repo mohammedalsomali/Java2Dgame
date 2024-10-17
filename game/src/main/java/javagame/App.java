@@ -1,16 +1,22 @@
-package Java2Dgame;
+package javagame;
 
 import javax.swing.JFrame;
 
-public class Main {
-    public static void main(String[] args){
-        // creating the screen
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
         JFrame window = new JFrame();
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.setResizable(false);
         window.setTitle("2D game");
+        window.setResizable(false);
 
-        GmaePanel gamePanel = new GmaePanel();
+
+        GamePanel gamePanel = new GamePanel();
         window.add(gamePanel);
         window.pack();
 

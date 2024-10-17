@@ -1,11 +1,11 @@
-package Java2Dgame;
+package javagame;
 
 import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
-public class GmaePanel extends JPanel implements Runnable {
+public class GamePanel extends JPanel implements Runnable {
     
     //screen settings
     final int originalTileSize = 16;
@@ -17,7 +17,7 @@ public class GmaePanel extends JPanel implements Runnable {
     final int screenWidth = titleSize * maxScreenCol;
     final int screenHeight = titleSize * maxScreenRow;
 
-    public GmaePanel() {
+    public GamePanel() {
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.YELLOW);
         this.setDoubleBuffered(true);
