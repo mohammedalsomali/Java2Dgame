@@ -17,6 +17,7 @@ public class App
 
 
         GamePanel gamePanel = new GamePanel();
+        gamePanel.gameStartThread();
         window.add(gamePanel);
         window.pack();
 
