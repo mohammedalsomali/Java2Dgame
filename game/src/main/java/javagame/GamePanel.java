@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import Entity.Player;
+
 
 
 public class GamePanel extends JPanel implements Runnable {
@@ -15,14 +17,15 @@ public class GamePanel extends JPanel implements Runnable {
     final int originalTileSize = 16;
     final int scale = 3;
 
-    final int titleSize = originalTileSize*scale;
+    public final int tileSize = originalTileSize*scale;
     final int maxScreenCol = 16;
     final int maxScreenRow = 12;
-    final int screenWidth = titleSize * maxScreenCol;
-    final int screenHeight = titleSize * maxScreenRow;
+    final int screenWidth = tileSize * maxScreenCol;
+    final int screenHeight = tileSize * maxScreenRow;
 
     Thread gameThread;
     MovementHandler movementH = new MovementHandler();
+    Player player = new Player(this, movementH);
 
     //set defualt p1 position and movement
     int playerX = 100;
@@ -65,7 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
 
 
             try {
-                double remainingTime = nextUpdate - System.nanoTime();
+                double remainingTime = nextUpdate - currentTime;
                 if(remainingTime < 0){
                     remainingTime = 0;
                 }
@@ -81,21 +84,7 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void update(){
-        if(movementH.upPress == true){
-            playerY -= playerSpeed;
-        }
-        if(movementH.downPress == true){
-            playerY += playerSpeed;
-        }
-        if(movementH.leftPress == true){
-            playerX -= playerSpeed;
-        
-            
-        }
-        if(movementH.rightPress == true){
-            playerX += playerSpeed;
-            
-         }
+        player.update();
     }
 
     public void paintComponent(Graphics g) {
@@ -103,8 +92,7 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
-        g2.setColor(Color.BLUE);
-        g2.fillRect(playerX, playerY, titleSize, titleSize);
+        player.paintComponent(g2);
         g2.dispose();
     }
 }
