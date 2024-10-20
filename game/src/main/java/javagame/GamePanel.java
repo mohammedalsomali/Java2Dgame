@@ -8,6 +8,8 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import Entity.Player;
+import tile.TileManeger;
+import tile.tile;
 
 
 
@@ -25,6 +27,8 @@ public class GamePanel extends JPanel implements Runnable {
 
     Thread gameThread;
     MovementHandler movementH = new MovementHandler();
+    TileManeger TM = new TileManeger(this);
+
     Player player = new Player(this, movementH);
 
     //set defualt p1 position and movement
@@ -92,6 +96,9 @@ public class GamePanel extends JPanel implements Runnable {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D)g;
+
+        TM.drawImage(g2);
+
         player.paintComponent(g2);
         g2.dispose();
     }

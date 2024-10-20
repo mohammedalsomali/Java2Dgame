@@ -22,19 +22,21 @@ public class Player extends Entity {
         x = 100;
         y = 100;
         speed = 5;
+        spriteCounter = 0;
+        spriteNum = 1;
         direction = "down";
     }
 
     public void getPolayerChar(){
         try{
-            up1 = ImageIO.read(GamePanel.class.getResource("/resources/up_1.png"));         
-            up2 = ImageIO.read(getClass().getResourceAsStream("/resources/up_2.png"));         
-            down1 = ImageIO.read(GamePanel.class.getResource("/resources/down_1.png"));         
-            down2 = ImageIO.read(getClass().getResourceAsStream("/resources/down_2.png"));         
-            right1 = ImageIO.read(getClass().getResourceAsStream("/resources/right_1.png"));         
-            right2 = ImageIO.read(getClass().getResourceAsStream("/resources/right_2.png"));         
-            left1 = ImageIO.read(getClass().getResourceAsStream("/resources/left_1.png"));         
-            left2 = ImageIO.read(getClass().getResourceAsStream("/resources/left_2.png"));         
+            up1 = ImageIO.read(GamePanel.class.getResource("/resources/player/up_1.png"));         
+            up2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/up_2.png"));         
+            down1 = ImageIO.read(GamePanel.class.getResource("/resources/player/down_1.png"));         
+            down2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/down_2.png"));         
+            right1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/right_1.png"));         
+            right2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/right_2.png"));         
+            left1 = ImageIO.read(getClass().getResourceAsStream("/resources/player/left_1.png"));         
+            left2 = ImageIO.read(getClass().getResourceAsStream("/resources/player/left_2.png"));         
 
         } catch(Exception e) {
 
@@ -42,27 +44,44 @@ public class Player extends Entity {
     }
 
     public void update(){
-        if(movementH.upPress == true){
-            y -= speed;
-            direction = "up";
-
-        }
-        if(movementH.downPress == true){
-            y += speed;
-            direction = "down";
-
-        }
-        if(movementH.leftPress == true){
-            x -= speed;
-            direction = "left";
-        
+        if(movementH.upPress == true || movementH.downPress == true || 
+        movementH.rightPress == true || movementH.leftPress == true){
+            if(movementH.upPress == true){
+                y -= speed;
+                direction = "up";
+    
+            }
+            if(movementH.downPress == true){
+                y += speed;
+                direction = "down";
+    
+            }
+            if(movementH.leftPress == true){
+                x -= speed;
+                direction = "left";
             
+                
+            }
+            if(movementH.rightPress == true){
+                x += speed;
+                direction = "right";
+                
+             }
+    
+    
+             spriteCounter++;
+             if(spriteCounter > 13){
+                if(spriteNum == 1){
+                    spriteNum = 2;
+                }
+                else if(spriteNum == 2){
+                    spriteNum = 1;
+                }
+    
+                spriteCounter = 0;
+             }
         }
-        if(movementH.rightPress == true){
-            x += speed;
-            direction = "right";
-            
-         }
+       
     }
 
     public void paintComponent(Graphics2D g) {
@@ -73,16 +92,36 @@ public class Player extends Entity {
         
         switch (direction) {
             case "up":
-                image = up1;
+                if(spriteNum == 1){
+                    image = up1;
+                }
+                if (spriteNum == 2){
+                    image = up2;
+                }
                 break;
             case "down":
-                image = down1;
+                if(spriteNum == 1){
+                    image = down1;
+                }
+                if (spriteNum == 2) {
+                    image = down2;
+                }
                 break;
             case "right":
-                image = right1;
+                if(spriteNum == 1){
+                    image = right1;
+                }
+                if (spriteNum == 2) {
+                    image = right2;
+                }
                 break;
             case "left":
-                image = left1;
+                if(spriteNum == 1){
+                    image = left1;
+                }
+                if (spriteNum == 2) {
+                    image = left2;
+                }
                 break;
         }
   
