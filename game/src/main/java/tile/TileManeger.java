@@ -28,7 +28,18 @@ public class TileManeger {
 
 
     public void drawImage(Graphics2D g){
-        g.drawImage(tile[0].image, 0, 0, gamePanel.tileSize, gamePanel.tileSize, null);
-        g.drawImage(tile[1].image, 200, 200, gamePanel.tileSize, gamePanel.tileSize, null);
+        int col = 0;
+        int row = 0;
+
+        while (col < gamePanel.maxScreenCol) {
+            while (row < gamePanel.maxScreenRow) {
+                g.drawImage(tile[0].image, col * gamePanel.tileSize, row * gamePanel.tileSize, gamePanel.tileSize, gamePanel.tileSize, null);
+                row++;
+            }
+            row = 0;
+            col++;
+  
+        }
+        g.drawImage(tile[1].image, 16*12, 200, gamePanel.tileSize, gamePanel.tileSize, null);
     }
 }
